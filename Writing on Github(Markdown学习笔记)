@@ -1,0 +1,239 @@
+
+
+
+> Written with [StackEdit](https://stackedit.io/).
+
+
+#一、Markdown Basics
+##1.1 Basic writing基本写作
+###1.1.1 Paragraphs 段落
+每个段落后面会一般需要跟空行
+
+###1.1.2 Headings 标题
+以多个`#`来表示不同级别的标题
+`#一号标题`
+`##二号标题`
+`###三号标题`
+`####四号标题`
+`#####五号标题`
+`######六号标题`
+
+###1.1.3 Blockquotes 引用
+In the words of Abraham Lincoln:
+> Pardon my french
+    
+    多加4个空格就是代码块
+
+###1.1.4 Styling text 个性化字体
+既可以“*”， 也可以“_”
+_表示斜体_
+*表示斜体*
+**表示加粗**
+***混合加粗斜体***
+*混合**使**用*
+
+注意区别：`GFM(Github Flavored Markdown)`规定， 使用“_”时如果是例如 _this_is_my_name 这样的变量可以特殊对待
+
+##1.2 Lists 列表
+###1.2.1 Unordered lists 无序列表
+空格，再加`-`
+
+ - List item1
+ - List Item2
+ - List Item3
+
+###1.2.2 Ordered lists 有序列表
+
+ 1. List item1
+ 2. List Item2
+ 3. List Item3
+
+##1.3 Links 链接
+使用`[ ]`框住需要链接的文本，使`用( )`框住指定的链接地址
+[Visit Github](www.github.com)
+>？？？有没有页面内跳转？？？
+
+----------
+二、GitHub Flavored Markdown
+Github使用`“GFM，Github Flavored Markdown”`，与`“SM，Standard Markdown”`有所区别且定义了一些额外功能。
+
+##2.1 Differences from traditional Markdown `GFM`与`SM`不同的地方
+###2.1.1 Multiple underscores in words
+为了不造成混淆，一些变量名字会有许多下划线，会忽略这里的下划线，不会斜体或加粗
+perform_complicated_task
+do_this_and_do_that_and_another_thing
+
+参考：Markdown Basics 的“Styling text 个性化字体”
+>？？？这里可不可以做个页内跳转链接？？？
+
+###2.1.2 URL autolinking 自动链接
+http://example.com
+
+自动转化为超链接形式，参考Markdown Basics的“超链接”
+>？？？可不可做页内跳转链接？？？
+
+###2.1.3 Strikethrough 中间划线，删除线(貌似StackEdit不支持这个功能)
+使用`~~`
+~~Mistaken text.~~
+
+###2.1.4 Fenced code blocks 代码块
+`SM`在句首敲4个空格，会自动生成代码块，但是不会着色什么的，`GFM`这点比较好，**注意代码中不需要空行**,使用**```**
+
+Here's an example:
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
+Keep in mind that, within lists, you must indent non-fenced code blocks eight spaces to render them properly.
+>这句话回头体味一下并举个例子,意思是在列表中，没有fenced的代码块必须手动缩进8个空格
+
+###2.1.5 Syntax highlighting
+在上面代码块的基础上，加上特定语言的高亮功能，使用了[`Linguist`](https://github.com/github/linguist)来执行语言检查以及语法高亮，具体支持什么语言可以参考这里[`the languages YAML file`](https://github.com/github/linguist/blob/master/lib/linguist/languages.yml)。
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+>???可以列几个常用的，c，c++，java，ruby，python等???
+
+###2.1.6 Tables 表格
+第一行使用`-`,列使用`|`来分割
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+更加美观的写法
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+注意，`|`书写时不需要完全对其，自动完成对齐工作
+
+| Name | Description          |
+| ------------- | ----------- |
+| Help      | Display the help window.|
+| Close     | Closes a window     |
+
+第一行分割线使用`:`可以指定左对齐，右对齐，中间对齐
+
+
+| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | 1600 |
+| col 2 is      | centered        |   12 |
+| zebra stripes | are neat        |    1 |
+
+| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | $1600 |
+| col 2 is      | centered        |   $12 |
+| zebra stripes | are neat        |    $1 |
+
+>？？？注意$的用法，是不是也有特殊意义？？？
+
+
+
+>？？？如何在代码中使用`#等干关键字？？？
+
+
+----------
+#三、Writing on Github(在Github上直接编辑)
+##3.1 Markup
+###3.1.1 Newlines 换行
+Github的换行直接换一行就可以，不需要段落后再加空行
+###3.1.2 Task Lists 任务列表
+在列表处直接加`[]`或者`[x]`
+ - [ ] List item1
+ - [x] List Item2
+
+参考:[Task Lists blog post](https://github.com/blog/1375-task-lists-in-gfm-%0Aissues-pulls-comments)
+
+###3.1.3 References 参考引用
+* SHA: 17bb13a686306dd0e95428d89311e45342532db0
+* User@SHA: mojombo@17bb13a686306dd0e95428d89311e45342532db0
+* User/Repository@SHA: mojombo/jekyll@17bb13a686306dd0e95428d89311e45342532db0
+* #Num: #1
+* User#Num: mojombo#1
+* User/Repository#Num: mojombo/jekyll#1
+
+##3.2 Features
+###3.2.1 Quick quoting 快速引用
+输入`r`会让你快速回复
+
+    Typing r on your keyboard lets you reply to the current issue or pull request with a comment. Any text you select within the discussion thread before pressing r will be added to your comment automatically and formatted as a blockquote.
+
+###3.2.2 Name and Team @mentions autocomplete
+输入“@”会调出项目人员以及团队列表。对于小组，输入`@organization/team-name`然后所有小组成员都会得到订阅。
+
+    Typing an @ symbol will bring up a list of people or teams on a project. The list filters as you type, so once you find the name of the person or team you are looking for, you can use the arrow keys to select it and hit either tab or enter to complete the name. For teams, just enter the @organization/team-name and all members of that team will get subscribed to the issue.
+
+###3.2.3 Emoji autocomplete
+输入`:`会调出表情列表。
+
+    Typing : will bring up a list of suggested emoji. The list will filter as you type, so once you find the emoji you're looking for, either hit tab or enter to complete the highlighted result.
+
+###3.2.4 Issue autocompletion
+输入`#`会调出推荐的`Issue`以及`Pull Requests`
+
+    Typing # will bring up a list of suggested Issues and Pull Requests. Type a number or some text to filter the list, then hit either tab or enter to complete the highlighted result.
+
+###3.2.5 Zen Mode (fullscreen) writing
+参考:[Zen Writing Mode](https://github.com/blog/1379-zen-writing-mode)
+
+
+----------
+#四、Mastering Markdown
+##4.1 Syntax guide
+Here’s an overview of Markdown syntax that you can use anywhere on GitHub.com or in your own text files.
+
+###4.1.1 Headers
+
+`# This is an <h1> tag`
+`## This is an <h2> tag`
+`###### This is an <h6> tag`
+
+###4.1.2 Emphasis
+*This text will be italic*
+_This will also be italic_
+
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+
+###4.1.3 Lists
+####Unordered
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b
+####Ordered
+1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b
+
+###4.1.4 Images
+###4.1.5 Links
+http://github.com - automatic!
+[GitHub](http://github.com)
+###4.1.6 Blockquotes
+**As a block**
+
+> We're living the future so
+> the present is our past.
+
+**Inline code**
+
+I think you should use an
+`<addr>` element here instead.
+
+##4.2 GitHub Flavored Markdown
+...
